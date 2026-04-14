@@ -10,10 +10,8 @@ import {
   Layout, 
   Trash2,
   Sparkles,
-  ArrowRight,
   Target,
   Trophy,
-  Palette,
   Monitor,
   Cpu,
   Feather,
@@ -83,16 +81,19 @@ export default function PromptMaker() {
     Role: [], Task: [], Tone: [], Format: [],
   });
   const [isCopied, setIsCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
-  // Theme change animation
   useEffect(() => {
-    document.body.className = THEMES[currentTheme].class;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     
-    // Initial entrance animations
+    // Theme change animation
     const ctx = gsap.context(() => {
       gsap.from(heroRef.current, { opacity: 0, y: 30, duration: 1, ease: "power3.out" });
       gsap.from(".category-card", { 
@@ -107,7 +108,7 @@ export default function PromptMaker() {
     }, mainRef);
 
     return () => ctx.revert();
-  }, [currentTheme]);
+  }, [currentTheme, mounted]);
 
   const handleSelect = (category: Category, id: string) => {
     setSelected((prev) => {
@@ -135,8 +136,10 @@ export default function PromptMaker() {
 
   const resetAll = () => setSelected({ Role: [], Task: [], Tone: [], Format: [] });
 
+  if (!mounted) return <div className="min-h-screen bg-white" />;
+
   return (
-    <div ref={mainRef} className="min-h-screen transition-all duration-500 overflow-x-hidden">
+    <div ref={mainRef} className={cn("min-h-screen transition-all duration-500 overflow-x-hidden", THEMES[currentTheme].class)}>
       {/* Dynamic Background Effects */}
       <div className="fixed inset-0 pointer-events-none opacity-10 dark:opacity-20">
         {currentTheme === "futuristic" && (
@@ -219,7 +222,7 @@ export default function PromptMaker() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Controls Grid */}
-          <div ref={gridRef} className="lg:col-span-8 space-y-16">
+          <div className="lg:col-span-8 space-y-16">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {categories.map((cat) => (
                 <div key={cat.name} className="category-card space-y-6">
