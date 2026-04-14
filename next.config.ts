@@ -2,11 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
+  trailingSlash: true, // 정적 호스팅 시 /about -> /about/index.html로 처리하여 호환성 향상
   images: {
     unoptimized: true,
   },
-  // GitHub Pages 등에 배포할 때 경로 문제가 있다면 아래 설정을 추가할 수 있습니다.
-  // basePath: '/prompt', 
 };
 
 export default nextConfig;
