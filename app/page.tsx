@@ -11,7 +11,8 @@ import {
   Zap, 
   Layout, 
   Trash2,
-  RefreshCw
+  RefreshCw,
+  type LucideIcon
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -133,7 +134,7 @@ export default function PromptMaker() {
     });
   };
 
-  const categories: { name: Category; icon: any }[] = [
+  const categories: { name: Category; icon: LucideIcon }[] = [
     { name: "Role", icon: User },
     { name: "Task", icon: Zap },
     { name: "Tone", icon: FileText },
