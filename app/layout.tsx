@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Prompt Maker",
-  description: "Generate structured prompts easily",
+  title: "PromptCraft - Design the Perfect AI Prompt",
+  description: "Generate structured and effective AI prompts with ease using a modern card-based interface.",
 };
 
 export default function RootLayout({

@@ -2,25 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #ffffff;
+    --fg: #000000;
+    --accent: #3b82f6;
+    --card-bg: #f9fafb;
+    --card-border: #e5e7eb;
+    --radius: 0.5rem;
+    --font-style: normal;
+  }
+
+  .theme-modern {
+    --bg: #ffffff;
+    --fg: #111827;
+    --accent: #2563eb;
+    --card-bg: #f3f4f6;
+    --card-border: #d1d5db;
+    --radius: 0.75rem;
+  }
+
+  .theme-sporty {
+    --bg: #050505;
+    --fg: #ffffff;
+    --accent: #facc15;
+    --card-bg: #111111;
+    --card-border: #333333;
+    --radius: 0px;
+    --font-style: italic;
+  }
+
+  .theme-minimal {
+    --bg: #fafafa;
+    --fg: #262626;
+    --accent: #525252;
+    --card-bg: #ffffff;
+    --card-border: #f3f3f3;
+    --radius: 2rem;
+  }
+
+  .theme-futuristic {
+    --bg: #020617;
+    --fg: #f1f5f9;
+    --accent: #8b5cf6;
+    --card-bg: rgba(15, 23, 42, 0.5);
+    --card-border: rgba(148, 163, 184, 0.1);
+    --radius: 1.5rem;
   }
 }
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-[var(--bg)] text-[var(--fg)] transition-colors duration-500;
+    font-family: 'Inter', sans-serif;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skew-btn {
+  transform: skewX(-12deg);
+}
+
+.skew-btn > * {
+  transform: skewX(12deg);
+}
+
+@keyframes flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-flow {
+  background-size: 200% 200%;
+  animation: flow 15s ease infinite;
 }
